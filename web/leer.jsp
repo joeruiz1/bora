@@ -1,11 +1,10 @@
 <%-- 
-    Document   : leer
-    Created on : 12/09/2017, 11:55:15 PM
-    Author     : Alejandro
+    Document   : index
+    Created on : 4/09/2017, 10:28:11 AM
+    Author     : Labing I5
 --%>
 
-<%@page import="Servicios.Inventario"%>
-<%@page import="Modelo.Serializacion"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
@@ -18,25 +17,25 @@
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
         <link rel="stylesheet" type="text/css" href="style/style.css" />
+        <link rel="stylesheet" type="text/css" href="formato.css" />
     </head>
 
     <body>
         <div id="main">
             <div id="header">
                 <div id="logo">
-                    <h1>Artes Graficas Ruiz</h1>
-                    <div class="slogan">Compra y Venta De Libros Nuevos Y Usados! </div>
+                    <h1>Sistema Pr&eacute;stamos Laboratorio</h1>
+                    <div class="slogan">Pr&eacute;stamos al Instante!</div>
                 </div>
                 <div id="menubar">
                     <ul id="menu">
                         <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
                         <li ><a href="index.jsp">Crear</a></li>
-                        <li><a href="Actualizar.jsp">Actualizar</a></li>
-                        <li class="current"><a href="leer.jsp">Leer</a></li>
-                        <li><a href="borrar.jsp">Borrar</a></li>
+                        <li><a href="examples.html">Actualizar</a></li>
+                        <li><a href="leer.jsp">Leer</a></li>
+                        <li><a href="another_page.html">Borrar</a></li>
                         <li><a href="contact.html">Listar Todo</a></li>
-                        <li><a href="inventario.jsp">Registrar libro</a></li>
-                        
+                        <li><a href="activo.jsp">Crear Activo</a></li>
                     </ul>
                 </div>
             </div>
@@ -47,6 +46,9 @@
                     <div class="sidebar">
                         <!-- insert your sidebar items here -->
                         <h3>&Uacute;ltimas Noticias</h3>
+                        <h4>No hay osciloscopios disponibles</h4>
+                        <h5>31 Agosto 2018</h5>
+                        <p>Los osciloscopios estan siendo usados en clase de Potencia<br /><a href="#">Read more</a></p>
                     </div>
                     <!-- Final presentacion Noticias-->
 
@@ -55,26 +57,39 @@
                 </div>
                 <div id="content">
                     <!-- insert the page content here -->
-                    <h1>Libros Existentes</h1>
+                    <h1>Registro de libros</h1>
+                    <table>
+                        <tr>
+                            <td>Libro</td>
+                            <td>autor</td>
+                            <td>editorial</td>
+                            <td>precio</td>                
+                        </tr>
+                        <%
+                            if (request.getAttribute("activos") != null) {
+                                ArrayList<dato.Libro> libros = (ArrayList<dato.Libro>) request.getAttribute("libros");
 
-                    <%
-                        //Serializacion se = new Serializacion();
-                        //Inventario in = new Inventario();
-                        //in=se.leer();
-                        //System.out.println(in);
-                        if (request.getAttribute("resultado") != null) {
-                            Boolean resultado = (Boolean) request.getAttribute("resultado");
-                            if (resultado.booleanValue() == true) {
-                    %>
-                    <h2> El Libro fue registrado satisfactoriamente</h2>
-                    <%
-                    } else {
-                    %>     
-                    <h2> El Libro no fue registrado </h2>
-                    <%
+                                if (libros != null) {
+                                    for (dato.Libro libro : libros) {
+
+                        %>
+                        <h1></h1>
+                        <tr>  
+                            <td><%=libro.getNombre()%></td>
+                            <td><%=libro.getAutor()%></td>
+                            <td><%=libro.getEditorial()%></td>
+                            <td><%=libro.getPrecio()%></td>
+                            <td><%=libro.getId()%></td>
+                        </tr>
+
+                        <%
+
+                                    }
+                                }
                             }
-                        }
-                    %>
+                        %>
+
+                    </table>
 
 
                 </div>

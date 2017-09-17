@@ -9,8 +9,10 @@ import Servicios.Inventario;
 import Servicios.Servicios;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Index;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Juan Manuel
  */
-public class ControlBorrar extends HttpServlet {
+public class Listar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,11 +35,26 @@ public class ControlBorrar extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        /* TODO output your page here. You may use following sample code. */
+            throws ServletException, IOException, ClassNotFoundException {
+         try (PrintWriter out = response.getWriter()) {
+        response.setContentType("text/html;charset=UTF-8");
+      RequestDispatcher rq =request.getRequestDispatcher("leer.jsp");
+            
+            ArrayList<dato.Libro> activos = null;
+            Servicios servicios = new Servicios();
+            Inventario bd = servicios.leer();
+            if(bd != null){
+                activos =  bd.getActivos();
+                request.setAttribute("activos", activos);
+            }else{
+               request.setAttribute("activos", null);
+            }
+            rq.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -50,7 +67,11 @@ public class ControlBorrar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Listar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -64,50 +85,11 @@ public class ControlBorrar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-
-        String id = request.getParameter("id");
-        int ids = Integer.parseInt(id);
-
-        String nombre = request.getParameter("nombre");
-        String autor = request.getParameter("autor");
-        String editoria = request.getParameter("editorial");
-        String precio = request.getParameter("precio");
-
-        int pre = Integer.parseInt(precio);
-
-        if (nombre.trim().length() > 0) {
-            //Abrir conexion
-            Servicios servicios = new Servicios();
-            //Cargar lo que hay actualmente en el archivo
-            dato.Libro libro = new dato.Libro(ids, nombre, autor, editoria, pre);
-            Inventario in = new Inventario();
-            boolean resultado = in.deletePrestamo(ids);
-            //Enviar datos a otro pagina
-            RequestDispatcher rq = request.getRequestDispatcher("borrar.jsp");
-            if (resultado == true) {
-                request.setAttribute("resultado", true);
-            } else {
-                request.setAttribute("resultado", false);
-            }
-            rq.forward(request, response);
-
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Listar.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-//        
-//      if(id!=null){
-//          System.out.println("NO EXISTEN LIBROS EN LA PLATAFORMA");
-//          
-//      }else{
-//      if(id==request.getParameter("id")){
-//          Inventario i=new Inventario();
-//          i.deletePrestamo(ids);
-//          System.out.println("libro borrado");
-//          
-//      }    
-//      
-//
-//        }
     }
 
     /**
@@ -119,5 +101,6 @@ public class ControlBorrar extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }

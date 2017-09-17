@@ -76,7 +76,7 @@ public class ControlLibro extends HttpServlet {
                 //Abrir conexion 
                 Servicios servicios = new Servicios();
                 //Cargar lo que hay actualmente en el archivo
-                Modelo.Libro libro = new Modelo.Libro(ids, nombre, autor, editoria, pre);
+                dato.Libro libro = new dato.Libro(ids, nombre, autor, editoria, pre);
                 boolean resultado = servicios.escribir(libro);
                 //Enviar datos a otro pagina
                 RequestDispatcher rq = request.getRequestDispatcher("inventario.jsp");

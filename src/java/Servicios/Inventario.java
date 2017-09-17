@@ -5,8 +5,8 @@
  */
 package Servicios;
 
-import Modelo.Factura;
-import Modelo.Libro;
+import dato.Factura;
+import dato.Libro;
 import java.io.Serializable;
 import java.util.ArrayList;
 

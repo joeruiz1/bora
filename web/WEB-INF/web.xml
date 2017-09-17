@@ -16,6 +16,10 @@
         <servlet-name>ControlActualizar</servlet-name>
         <servlet-class>Controladores.ControlActualizar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Listar</servlet-name>
+        <servlet-class>Controladores.Listar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControlLibro</servlet-name>
         <url-pattern>/ControlLibro</url-pattern>
@@ -32,11 +36,13 @@
         <servlet-name>ControlActualizar</servlet-name>
         <url-pattern>/ControlActualizar</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Listar</servlet-name>
+        <url-pattern>/Listar</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
-    
 </web-app>
