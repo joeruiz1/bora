@@ -69,31 +69,35 @@ public class ControlBorrar extends HttpServlet {
         String id = request.getParameter("id");
         int ids = Integer.parseInt(id);
 
-        String nombre = request.getParameter("nombre");
-        String autor = request.getParameter("autor");
-        String editoria = request.getParameter("editorial");
-        String precio = request.getParameter("precio");
 
-        int pre = Integer.parseInt(precio);
-
-        if (nombre.trim().length() > 0) {
+        
+        if (id.trim().length() > 0) {
             //Abrir conexion
             Servicios servicios = new Servicios();
             //Cargar lo que hay actualmente en el archivo
-            dato.Libro libro = new dato.Libro(ids, nombre, autor, editoria, pre);
+            Modelo.Libro libro = new Modelo.Libro(ids);
+            
+            
             Inventario in = new Inventario();
-            boolean resultado = in.deletePrestamo(ids);
-            //Enviar datos a otro pagina
-            RequestDispatcher rq = request.getRequestDispatcher("borrar.jsp");
-            if (resultado == true) {
-                request.setAttribute("resultado", true);
-            } else {
-                request.setAttribute("resultado", false);
-            }
-            rq.forward(request, response);
-
+             
+            try {
+                Inventario resultado = servicios.leer();        
+                in = servicios.leer();
+                for (int i = 0; i < libro.getId(); i++) {
+                if(libro.getId()== ids){
+                 in.deletePrestamo(i);
+                    System.out.println("BORRADO");
+                }else {
+                    System.out.println("No BORRADO POR QUE NO SE ENCONTRO ");
+                }
+                    
+                }
+                
+            } catch (ClassNotFoundException ex) {
+              }
+            
         }
-
+            
 //        
 //      if(id!=null){
 //          System.out.println("NO EXISTEN LIBROS EN LA PLATAFORMA");

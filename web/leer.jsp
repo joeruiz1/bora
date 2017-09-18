@@ -24,16 +24,16 @@
         <div id="main">
             <div id="header">
                 <div id="logo">
-                    <h1>Sistema Pr&eacute;stamos Laboratorio</h1>
+                    <h1> Ar&eacute;tes Graficas Ruiz</h1>
                     <div class="slogan">Pr&eacute;stamos al Instante!</div>
                 </div>
                 <div id="menubar">
                     <ul id="menu">
                         <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
                         <li ><a href="index.jsp">Crear</a></li>
-                        <li><a href="examples.html">Actualizar</a></li>
+                        <li><a href="Actualizar.jsp">Actualizar</a></li>
                         <li><a href="leer.jsp">Leer</a></li>
-                        <li><a href="another_page.html">Borrar</a></li>
+                        <li><a href="borrar.jsp">Borrar</a></li>
                         <li><a href="contact.html">Listar Todo</a></li>
                         <li><a href="activo.jsp">Crear Activo</a></li>
                     </ul>
@@ -46,10 +46,7 @@
                     <div class="sidebar">
                         <!-- insert your sidebar items here -->
                         <h3>&Uacute;ltimas Noticias</h3>
-                        <h4>No hay osciloscopios disponibles</h4>
-                        <h5>31 Agosto 2018</h5>
-                        <p>Los osciloscopios estan siendo usados en clase de Potencia<br /><a href="#">Read more</a></p>
-                    </div>
+                                            </div>
                     <!-- Final presentacion Noticias-->
 
 
@@ -67,10 +64,10 @@
                         </tr>
                         <%
                             if (request.getAttribute("activos") != null) {
-                                ArrayList<dato.Libro> libros = (ArrayList<dato.Libro>) request.getAttribute("libros");
+                                ArrayList<Modelo.Libro> libros = (ArrayList<Modelo.Libro>) request.getAttribute("libros");
 
                                 if (libros != null) {
-                                    for (dato.Libro libro : libros) {
+                                    for (Modelo.Libro libro : libros) {
 
                         %>
                         <h1></h1>

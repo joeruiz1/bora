@@ -5,8 +5,8 @@
  */
 package Servicios;
 
-import dato.Libro;
-import dato.Serializacion;
+import Modelo.Libro;
+import Modelo.Serializacion;
 import java.io.IOException;
 
 /**
@@ -31,4 +31,8 @@ public class Servicios {
         Inventario bd = serializacion.leer();
         return bd;
     }
+    
+   
+    
+    
 }

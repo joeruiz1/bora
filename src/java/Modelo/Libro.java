@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dato;
+package Modelo;
 
 import java.io.Serializable;
 
@@ -27,6 +27,11 @@ public class Libro implements Serializable  {
         this.precio = precio;
         
     }
+
+    public Libro(int id) {
+        this.id = id;
+    }
+     
 
     public int getId() {
         return id;

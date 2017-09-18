@@ -67,10 +67,10 @@
              //Si la variable que me deben enviar existe  
            if(request.getAttribute("activos")!=null){
              //Capturando informacion variable que me estan enviado.    
-            ArrayList<dato.Libro> libros =  (ArrayList<dato.Libro>)request.getAttribute("Libros");
+            ArrayList<Modelo.Libro> libros =  (ArrayList<Modelo.Libro>)request.getAttribute("Libros");
                //Existan activos
              if(libros != null){
-                for (dato.Libro li : libros) {
+                for (Modelo.Libro li : libros) {
             %>
               <option value="<%=li.getNombre()%>"><%=li.getNombre()%>
               

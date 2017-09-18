@@ -40,7 +40,7 @@ public class Listar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
       RequestDispatcher rq =request.getRequestDispatcher("leer.jsp");
             
-            ArrayList<dato.Libro> activos = null;
+            ArrayList<Modelo.Libro> activos = null;
             Servicios servicios = new Servicios();
             Inventario bd = servicios.leer();
             if(bd != null){
